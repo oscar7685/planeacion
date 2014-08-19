@@ -69,7 +69,7 @@ public class Pregunta implements Serializable {
     @ManyToOne
     private Pregunta preguntaPadre;
     @JoinColumn(name = "encuesta_idencuesta", referencedColumnName = "idencuesta")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Encuesta encuestaIdencuesta;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "preguntaCondicionadora")
     private List<Condicion> condicionList;

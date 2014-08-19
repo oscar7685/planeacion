@@ -15,8 +15,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -35,10 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p"),
     @NamedQuery(name = "Persona.findByIdpersona", query = "SELECT p FROM Persona p WHERE p.idpersona = :idpersona"),
-    @NamedQuery(name = "Persona.findByNombre", query = "SELECT p FROM Persona p WHERE p.nombre = :nombre"),
-    @NamedQuery(name = "Persona.findByVinculacion", query = "SELECT p FROM Persona p WHERE p.vinculacion = :vinculacion"),
-    @NamedQuery(name = "Persona.findByTiempo", query = "SELECT p FROM Persona p WHERE p.tiempo = :tiempo"),
-    @NamedQuery(name = "Persona.findBySemestre", query = "SELECT p FROM Persona p WHERE p.semestre = :semestre")})
+    @NamedQuery(name = "Persona.findByTipo", query = "SELECT p FROM Persona p WHERE p.tipo = :tipo")})
 public class Persona implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,21 +42,10 @@ public class Persona implements Serializable {
     @Column(name = "idpersona")
     private Integer idpersona;
     @Size(max = 100)
-    @Column(name = "nombre")
-    private String nombre;
-    @Size(max = 100)
-    @Column(name = "vinculacion")
-    private String vinculacion;
-    @Size(max = 255)
-    @Column(name = "tiempo")
-    private String tiempo;
-    @Column(name = "semestre")
-    private Integer semestre;
+    @Column(name = "tipo")
+    private String tipo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personaIdpersona")
     private List<Resultados> resultadosList;
-    @JoinColumn(name = "programa_idprograma", referencedColumnName = "idprograma")
-    @ManyToOne(optional = false)
-    private Programa programaIdprograma;
 
     public Persona() {
     }
@@ -78,36 +62,12 @@ public class Persona implements Serializable {
         this.idpersona = idpersona;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getVinculacion() {
-        return vinculacion;
-    }
-
-    public void setVinculacion(String vinculacion) {
-        this.vinculacion = vinculacion;
-    }
-
-    public String getTiempo() {
-        return tiempo;
-    }
-
-    public void setTiempo(String tiempo) {
-        this.tiempo = tiempo;
-    }
-
-    public Integer getSemestre() {
-        return semestre;
-    }
-
-    public void setSemestre(Integer semestre) {
-        this.semestre = semestre;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     @XmlTransient
@@ -117,14 +77,6 @@ public class Persona implements Serializable {
 
     public void setResultadosList(List<Resultados> resultadosList) {
         this.resultadosList = resultadosList;
-    }
-
-    public Programa getProgramaIdprograma() {
-        return programaIdprograma;
-    }
-
-    public void setProgramaIdprograma(Programa programaIdprograma) {
-        this.programaIdprograma = programaIdprograma;
     }
 
     @Override

@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class PreguntaFacade extends AbstractFacade<Pregunta> {
-    @PersistenceContext(unitName = "com.udec_encuestas_war_1.0-SNAPSHOTPU")
+    @PersistenceContext(unitName = "planeacionPU")
     private EntityManager em;
 
     @Override

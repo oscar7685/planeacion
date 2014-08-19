@@ -32,7 +32,7 @@
                 </c:otherwise>
             </c:choose>
 
-             <a href="Encuestas?accion=crearPregunta" class="btn btn-large btn-primary llamador"><i class="icon-plus"></i> Crear pregunta</a>
+                    <a href="${pageContext.request.contextPath}/Encuestas?accion=crearPregunta" class="btn btn-large btn-primary llamador"><i class="icon-plus"></i> Crear pregunta</a>
              
         </div>
     </div>

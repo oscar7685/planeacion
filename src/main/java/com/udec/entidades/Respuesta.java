@@ -35,8 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Respuesta.findAll", query = "SELECT r FROM Respuesta r"),
     @NamedQuery(name = "Respuesta.findByIdrespuesta", query = "SELECT r FROM Respuesta r WHERE r.idrespuesta = :idrespuesta"),
-    @NamedQuery(name = "Respuesta.findByRespuesta", query = "SELECT r FROM Respuesta r WHERE r.respuesta = :respuesta"),
-    @NamedQuery(name = "Respuesta.findByOrden", query = "SELECT r FROM Respuesta r WHERE r.orden = :orden")})
+    @NamedQuery(name = "Respuesta.findByRespuesta", query = "SELECT r FROM Respuesta r WHERE r.respuesta = :respuesta")})
 public class Respuesta implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,8 +46,6 @@ public class Respuesta implements Serializable {
     @Size(max = 100)
     @Column(name = "respuesta")
     private String respuesta;
-    @Column(name = "orden")
-    private Integer orden;
     @OneToMany(mappedBy = "respuestaIdrespuesta")
     private List<Resultados> resultadosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "respuestaCondicionadora")
@@ -56,9 +53,6 @@ public class Respuesta implements Serializable {
     @JoinColumn(name = "pregunta_idpregunta", referencedColumnName = "idpregunta")
     @ManyToOne(optional = false)
     private Pregunta preguntaIdpregunta;
-    @JoinColumn(name = "grupo_respuestas_idgrupo_respuestas", referencedColumnName = "idgrupo_respuestas")
-    @ManyToOne
-    private GrupoRespuestas grupoRespuestasIdgrupoRespuestas;
 
     public Respuesta() {
     }
@@ -81,14 +75,6 @@ public class Respuesta implements Serializable {
 
     public void setRespuesta(String respuesta) {
         this.respuesta = respuesta;
-    }
-
-    public Integer getOrden() {
-        return orden;
-    }
-
-    public void setOrden(Integer orden) {
-        this.orden = orden;
     }
 
     @XmlTransient
@@ -115,14 +101,6 @@ public class Respuesta implements Serializable {
 
     public void setPreguntaIdpregunta(Pregunta preguntaIdpregunta) {
         this.preguntaIdpregunta = preguntaIdpregunta;
-    }
-
-    public GrupoRespuestas getGrupoRespuestasIdgrupoRespuestas() {
-        return grupoRespuestasIdgrupoRespuestas;
-    }
-
-    public void setGrupoRespuestasIdgrupoRespuestas(GrupoRespuestas grupoRespuestasIdgrupoRespuestas) {
-        this.grupoRespuestasIdgrupoRespuestas = grupoRespuestasIdgrupoRespuestas;
     }
 
     @Override

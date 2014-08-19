@@ -30,9 +30,4 @@ public class PersonaFacade extends AbstractFacade<Persona> {
         super(Persona.class);
     }
 
-    public Persona findByUltimo() {
-        Query q = em.createQuery("SELECT e FROM Persona e order by e.idpersona desc",Persona.class);
-        q.setMaxResults(1);
-        return (Persona) q.getSingleResult();
-    }
 }

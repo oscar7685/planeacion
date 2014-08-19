@@ -42,12 +42,12 @@ public class Condicion implements Serializable {
     @Size(max = 45)
     @Column(name = "tipo")
     private String tipo;
-    @JoinColumn(name = "respuestaCondicionadora", referencedColumnName = "idrespuesta")
-    @ManyToOne(optional = false)
-    private Respuesta respuestaCondicionadora;
     @JoinColumn(name = "preguntaCondicionadora", referencedColumnName = "idpregunta")
     @ManyToOne(optional = false)
     private Pregunta preguntaCondicionadora;
+    @JoinColumn(name = "respuestaCondicionadora", referencedColumnName = "idrespuesta")
+    @ManyToOne(optional = false)
+    private Respuesta respuestaCondicionadora;
     @JoinColumn(name = "preguntaCondicionada", referencedColumnName = "idpregunta")
     @ManyToOne(optional = false)
     private Pregunta preguntaCondicionada;
@@ -75,20 +75,20 @@ public class Condicion implements Serializable {
         this.tipo = tipo;
     }
 
-    public Respuesta getRespuestaCondicionadora() {
-        return respuestaCondicionadora;
-    }
-
-    public void setRespuestaCondicionadora(Respuesta respuestaCondicionadora) {
-        this.respuestaCondicionadora = respuestaCondicionadora;
-    }
-
     public Pregunta getPreguntaCondicionadora() {
         return preguntaCondicionadora;
     }
 
     public void setPreguntaCondicionadora(Pregunta preguntaCondicionadora) {
         this.preguntaCondicionadora = preguntaCondicionadora;
+    }
+
+    public Respuesta getRespuestaCondicionadora() {
+        return respuestaCondicionadora;
+    }
+
+    public void setRespuestaCondicionadora(Respuesta respuestaCondicionadora) {
+        this.respuestaCondicionadora = respuestaCondicionadora;
     }
 
     public Pregunta getPreguntaCondicionada() {

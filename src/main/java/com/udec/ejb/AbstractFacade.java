@@ -62,10 +62,10 @@ public abstract class AbstractFacade<T> {
         return ((Long) q.getSingleResult()).intValue();
     }
 
-    public List<T> findLastPregunta() {
+    public List<T> findLast(String parametro) {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
-        Query q = getEntityManager().createQuery("SELECT c FROM " + entityClass.getSimpleName() + " c ORDER BY c.idpregunta DESC", entityClass);
+        Query q = getEntityManager().createQuery("SELECT c FROM " + entityClass.getSimpleName() + " c ORDER BY c."+parametro+" DESC", entityClass);
         q.setMaxResults(1);
         return q.getResultList();
     }

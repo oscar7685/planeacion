@@ -32,7 +32,7 @@
                     No existen Encuestas registradas en el sistema.
                 </c:otherwise>
             </c:choose>
-
+                    <a href="${pageContext.request.contextPath}/Encuestas?accion=crearEncuesta" class="btn btn-large btn-primary llamador"><i class="icon-plus"></i> Crear encuesta</a>
         </div>
     </div>
 </div>

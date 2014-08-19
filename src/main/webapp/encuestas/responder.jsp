@@ -54,88 +54,6 @@
                 </div>
                 <br/>
 
-
-                <div class="form-group">
-                    <label for="facultad" class="col-sm-1 control-label">Facultad</label>
-                    <div class="col-sm-4">
-                        <select id="facultad" class="form-control input-sm required" name="facultad">
-                            <option value=""></option>
-                            <c:forEach items="${listaF}" var="row" varStatus="iter">
-                                <option value="${row.idfacultad}">${row.facultad}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                    <label for="programa" class="col-sm-2 control-label">Programa</label>
-                    <div class="col-sm-5">
-                        <select id="programa" class="form-control input-sm required" name="programa">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-                <c:choose>
-                    <c:when test="${encuesta.idencuesta==1}">
-                        <div class="form-group">
-                            <label for="nombre" class="col-sm-1 control-label">Docente</label>
-                            <div class="col-sm-11">
-                                <input type="text" class="form-control input-sm  required" id="nombre" placeholder="Nombre" name="nombre">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="vinculacion" class="col-sm-1 control-label">Vinculaci&oacute;n</label>
-                            <div class="col-sm-4">
-                                <select id="vinculacion" class="form-control input-sm required" name="vinculacion">
-                                    <option value=""></option>
-                                    <option value="Tiempo completo">Tiempo completo</option>
-                                    <option value="Medio tiempo">Medio tiempo</option>
-                                    <option value="Catedra">C&aacute;tedra</option>
-                                </select>
-                            </div>
-                            <label for="tiempo" class="col-sm-2 control-label">Tiempo de vinculaci&oacute;n</label>
-                            <div class="col-sm-5">
-                                <select id="tiempo" class="form-control input-sm required" name="tiempo">
-                                    <option value=""></option>
-                                    <option value="menos1">Menos de un a&nacute;o</option>
-                                    <option value="entre1y2">Entre 1 y 2 a&nacute;os</option>
-                                    <option value="entre2y5">Entre 2 y 5 a&nacute;os</option>
-                                    <option value="entre5y10">Entre 5 y 10 a&nacute;os</option>
-                                    <option value="entre10y15">Entre 10 y 15 a&nacute;os</option>
-                                    <option value="mas15">M&aacute;s de 15 a&nacute;os</option>
-                                </select>
-                            </div>
-                        </div>
-                    </c:when>
-                    <c:when test="${encuesta.idencuesta==2}">
-                        <div class="form-group">
-                            <label for="nombre" class="col-sm-1 control-label">Estudiante</label>
-                            <div class="col-sm-11">
-                                <input type="text" name="nombre" class="form-control input-sm required" id="nombre"  placeholder="Nombre"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="semestre" class="col-sm-1 control-label">Semestre</label>
-                            <div class="col-sm-4">
-                                <select id="semestre" class="form-control input-sm required" name="semestre">
-                                    <option value=""></option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-
-                                </select>
-                            </div>
-                        </div>
-                    </c:when>
-                </c:choose>
-                <div class="form-group">
-                    <label>&nbsp;</label>
-                </div>
-
                 <c:forEach items="${preguntas}" var="pregunta" varStatus="status">
                     <c:choose>
                         <%--Pregunta seleccion multiple multiple respuesta SIN ordenamiento--%>
@@ -491,7 +409,7 @@
                                                                 <!--<script src='//code.jquery.com/ui/1.10.4/jquery-ui.js'></script>-->
                                                                 <!--<script src="http://jqueryvalidation.org/files/dist/jquery.validate.js"></script>-->
                                                                 <!--<script src="<%=request.getContextPath()%>/assets/js/jquery.metadata.js"></script>-->
-                                                                <script type = "text/javascript" src = "http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+                                                                <script src="<%=request.getContextPath()%>/assets/js/jquery.validate.js"></script>
                                                                 <script src="dist/js/responder.js"></script>
                                                                 </body>
                                                                 </html>

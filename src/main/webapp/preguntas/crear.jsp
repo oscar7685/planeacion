@@ -31,7 +31,7 @@
                     submitHandler: function() {
                         $.ajax({
                             type: 'POST',
-                            url: "/encuestas/Encuestas?accion=crearPregunta2",
+                            url: "Encuestas?accion=crearPregunta2",
                             data: $("#formCrearPregunta").serialize(),
                             success: function() {
                                 location = "preguntas/listar.jsp";
@@ -62,13 +62,13 @@
                         <div class="form-group">
                             <label for="pregunta" class="col-sm-1 control-label">Pregunta</label>
                             <div class="col-sm-11">
-                                <textarea name="pregunta" id="pregunta" class="form-control" rows="3"></textarea>
+                                <textarea name="pregunta" id="pregunta" class="form-control required" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="tipo" class="col-sm-1 control-label">Tipo de la Pregunta</label>
                             <div class="col-sm-11">
-                                <select name="tipo" id="tipo" class="form-control">
+                                <select name="tipo" id="tipo" class="form-control required">
                                     <option></option>
                                     <option value="0">Pregunta seleccion multiple unica respuesta</option>
                                     <option value="1" >Pregunta seleccion multiple multiple respuesta CON ordenamiento</option>
