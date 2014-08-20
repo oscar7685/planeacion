@@ -70,14 +70,13 @@ public class Encuestas extends HttpServlet {
             } else if (accion.equals("crearEncuesta2")) {
                 String objetivo = (String) request.getParameter("objetivo");
                 String nombre = (String) request.getParameter("nombre");
-                
+
                 Encuesta e = new Encuesta();
                 e.setNombre(nombre);
                 e.setObjetivo(objetivo);
                 encuestaFacade.create(e);
                 sesion.setAttribute("listaE", encuestaFacade.findAll());
-                
-                
+
             }
 
             if (accion.equals("irEncuesta")) {
@@ -203,14 +202,17 @@ public class Encuestas extends HttpServlet {
                         if (accion.equals("crearPregunta2")) {
                             Pregunta pre = new Pregunta();
                             String idencuesta = (String) request.getParameter("idencuesta");
-                            String padre = (String) request.getParameter("padre");
                             String pregunta = (String) request.getParameter("pregunta");
                             String otro = (String) request.getParameter("otro");
                             String textoOtro = (String) request.getParameter("textoOtro");
                             String tipo = (String) request.getParameter("tipo");
                             String resp = (String) request.getParameter("respuestas").trim();
                             String[] res = resp.split("\n");
-
+                            String[] subpre = null;
+                            if (tipo.equals("8")) {
+                                String subpreguntas = (String) request.getParameter("subpreguntas").trim();
+                                subpre = subpreguntas.split("\n");
+                            }
                             pre.setEncuestaIdencuesta(encuestaFacade.find(Integer.parseInt(idencuesta)));
                             pre.setPregunta(pregunta);
                             if (otro != null) {
@@ -219,9 +221,6 @@ public class Encuestas extends HttpServlet {
 
                             }
 
-                            if (padre != null && !padre.equals("")) {
-                                pre.setPreguntaPadre(preguntaFacade.find(Integer.parseInt(padre)));
-                            }
                             pre.setTipo(tipo);
                             //0
                             //1
@@ -229,17 +228,27 @@ public class Encuestas extends HttpServlet {
                             preguntaFacade.create(pre);
                             Pregunta ultima = preguntaFacade.findLast("idpregunta").get(0);
 
-                            if (tipo.equals("0") || tipo.equals("1") || tipo.equals("6") || tipo.equals("7")) {
-                                for (int i = 0; i < res.length; i++) {
+                            if (tipo.equals("0") || tipo.equals("1") || tipo.equals("6") || tipo.equals("7") || tipo.equals("8")) {
+                                for (String re : res) {
                                     Respuesta r = new Respuesta();
-                                    r.setRespuesta(res[i]);
+                                    r.setRespuesta(re);
                                     r.setPreguntaIdpregunta(ultima);
                                     respuestaFacade.create(r);
                                 }
                                 List<Respuesta> respuestas = respuestaFacade.findByList("preguntaIdpregunta", ultima);
                                 ultima.setRespuestaList(respuestas);
-                            }
 
+                            }
+                            if (tipo.equals("8")) {
+                                for (String subpre1 : subpre) {
+                                    Pregunta sub = new Pregunta();
+                                    sub.setPregunta(subpre1);
+                                    sub.setPreguntaPadre(ultima);
+                                    preguntaFacade.create(sub);
+                                }
+                                List<Pregunta> subs = preguntaFacade.findByList("preguntaPadre", ultima);
+                                ultima.setPreguntaList(subs);
+                            }
                             preguntaFacade.edit(ultima);
                             sesion.setAttribute("listaP", preguntaFacade.findAll());
 

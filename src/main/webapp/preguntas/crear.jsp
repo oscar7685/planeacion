@@ -39,6 +39,16 @@
                         }); //fin $.ajax
                     }
                 });
+
+                $("#tipo").change(function() {
+                    if ($("#tipo option:selected").val() === "8") {
+                        $("#subs").removeClass("hide");
+                    } else {
+                        if (!$("#subs").hasClass("hide")) {
+                            $("#subs").addClass("hide");
+                        }
+                    }
+                });
             });
         </script>
     </head>
@@ -80,6 +90,7 @@
                                     <option value="5" >Comentario</option>
                                     <option value="6" >Pregunta seleccion multiple multiple respuesta SIN ordenamiento</option>
                                     <option value="7" >Pregunta SOLO ordenamiento</option>
+                                    <option value="8" >Matriz</option>
                                 </select>
                             </div>
                         </div>
@@ -87,6 +98,12 @@
                             <label for="respuestas" class="col-sm-1 control-label">Respuestas</label>
                             <div class="col-sm-11">
                                 <textarea name="respuestas" id="respuestas" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group hide" id="subs">
+                            <label for="subpreguntas" class="col-sm-1 control-label">Sub preguntas</label>
+                            <div class="col-sm-11">
+                                <textarea name="subpreguntas" id="subpreguntas" class="form-control" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -101,17 +118,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="padre" class="col-sm-1 control-label">Pregunta padre</label>
-                            <div class="col-sm-11">
-                                <select id="padre" name="padre" class="form-control">
-                                    <option></option>
-                                    <c:forEach items="${listaP}" var="row" varStatus="iter">
-                                        <option value="${row.idpregunta}">${row.pregunta}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
+                        
                         <div class="form-actions">
                             <button class="btn btn-primary" type="submit">Crear Pregunta</button>
                             <button class="btn" type="reset">Cancelar</button>

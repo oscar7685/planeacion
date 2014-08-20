@@ -43,7 +43,7 @@ public class Respuesta implements Serializable {
     @Basic(optional = false)
     @Column(name = "idrespuesta")
     private Integer idrespuesta;
-    @Size(max = 100)
+    @Size(max = 2000)
     @Column(name = "respuesta")
     private String respuesta;
     @OneToMany(mappedBy = "respuestaIdrespuesta")

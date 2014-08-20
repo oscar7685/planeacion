@@ -20,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -64,6 +65,7 @@ public class Pregunta implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "preguntaIdpregunta")
     private List<Resultados> resultadosList;
     @OneToMany(mappedBy = "preguntaPadre")
+    @OrderColumn(name="idpregunta")
     private List<Pregunta> preguntaList;
     @JoinColumn(name = "pregunta_padre", referencedColumnName = "idpregunta")
     @ManyToOne
@@ -76,6 +78,7 @@ public class Pregunta implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "preguntaCondicionada")
     private List<Condicion> condicionList1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "preguntaIdpregunta")
+    @OrderColumn(name="idrespuesta")
     private List<Respuesta> respuestaList;
 
     public Pregunta() {
