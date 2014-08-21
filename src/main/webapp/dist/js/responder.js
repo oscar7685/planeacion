@@ -11,7 +11,6 @@ $(function() {
                     data: $("#form_encuesta").serialize(),
                     type: 'post',
                     success: function() {
-                        console.log("huepaje");
                         $("#myModalGracias").modal();
                         $('#myModalGracias').on('hide.bs.modal', function() {
                             location = "/planeacion/";

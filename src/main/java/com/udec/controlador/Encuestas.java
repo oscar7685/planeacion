@@ -80,7 +80,6 @@ public class Encuestas extends HttpServlet {
             }
 
             if (accion.equals("irEncuesta")) {
-                System.out.println("TU MAMA ESTA EN BOLA");
                 String idencuesta = (String) request.getParameter("idencuesta");
                 Encuesta e = encuestaFacade.find(Integer.parseInt(idencuesta));
                 sesion.setAttribute("encuesta", e);
@@ -90,7 +89,6 @@ public class Encuestas extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (accion.equals("guardarEncuesta")) {
-                System.out.println("asjdfj");
                 Encuesta encuesta = (Encuesta) sesion.getAttribute("encuesta");
                 List<Pregunta> preguntas = encuesta.getPreguntaList();
                 Persona p = new Persona();
