@@ -7,14 +7,14 @@ $(function() {
         submitHandler: function() {
             this.timer = setTimeout(function() {
                 $.ajax({
-                    url: '/encuestas/Encuestas?accion=guardarEncuesta',
+                    url: 'Encuestas?accion=guardarEncuesta',
                     data: $("#form_encuesta").serialize(),
                     type: 'post',
                     success: function() {
-
+                        console.log("huepaje");
                         $("#myModalGracias").modal();
                         $('#myModalGracias').on('hide.bs.modal', function() {
-                            location = "/encuestas/";
+                            location = "/planeacion/";
                         });
                     }
 
@@ -22,24 +22,8 @@ $(function() {
             }, 400);
         }
     });
-    $("#facultad").change(function() {
-        $.ajax({
-            type: 'POST',
-            url: "Encuestas?accion=selectorProgramas",
-            data: "facultad=" + $('#facultad :selected').val(),
-            dataType: "json",
-            success: function(datos) {
-                $("#programa").empty();
-                $.each(datos.programas, function(posicion, programa) {
-                    $("#programa").append("<option value='" +
-                            programa.id + "'>" + programa.programa + "</option>");
-                });
-            }, //fin success
-        }); //fin $.ajax
-    });
     $(".form-group .radio input[type=radio]").change(function() {
         if ($(this).prop("value") === "otro") {
-            console.log("otro!!");
             $(this).parents("div.radio").find("input[type=text]").prop('disabled', false);
             $(this).parents("div.radio").find("input[type=text]").focus();
         } else {

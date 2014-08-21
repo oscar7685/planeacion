@@ -80,6 +80,7 @@ public class Encuestas extends HttpServlet {
             }
 
             if (accion.equals("irEncuesta")) {
+                System.out.println("TU MAMA ESTA EN BOLA");
                 String idencuesta = (String) request.getParameter("idencuesta");
                 Encuesta e = encuestaFacade.find(Integer.parseInt(idencuesta));
                 sesion.setAttribute("encuesta", e);
@@ -89,10 +90,18 @@ public class Encuestas extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (accion.equals("guardarEncuesta")) {
-                String tipo = (String) request.getParameter("nombre");
+                System.out.println("asjdfj");
                 Encuesta encuesta = (Encuesta) sesion.getAttribute("encuesta");
                 List<Pregunta> preguntas = encuesta.getPreguntaList();
                 Persona p = new Persona();
+                String tipo = "";
+                if (encuesta.getIdencuesta() == 1) {
+                    tipo = "estudiante";
+                } else if (encuesta.getIdencuesta() == 2) {
+                    tipo = "docente";
+                } else if (encuesta.getIdencuesta() == 2) {
+                    tipo = "administrativo";
+                }
                 p.setTipo(tipo);
 
                 personaFacade.create(p);
@@ -126,6 +135,29 @@ public class Encuestas extends HttpServlet {
 
                         }
                         resultadosFacade.create(re);
+                    } else if (pregunta.getTipo().equals("8")) {//matriz
+                        List<Pregunta> subpreguntas = pregunta.getPreguntaList();
+                        for (Pregunta pregunta1 : subpreguntas) {
+                            Resultados re = new Resultados();
+                            re.setPersonaIdpersona(recienCreado);
+                            re.setPreguntaIdpregunta(pregunta1);
+                            String respuesta1 = (String) request.getParameter("pregunta" + pregunta1.getIdpregunta());
+                            try {
+                                int idRespuesta = Integer.parseInt(respuesta1);
+                                re.setRespuestaIdrespuesta(respuestaFacade.find(idRespuesta));
+                            } catch (Exception e) {
+                                if (respuesta1 != null && respuesta1.equals("otro")) {
+                                    String respuesta2 = (String) request.getParameter("preguntaOtro" + pregunta.getIdpregunta());
+                                    re.setValor(respuesta2);
+                                }
+                                if (respuesta1 == null) {
+                                    continue;
+                                }
+
+                            }
+                            resultadosFacade.create(re);
+
+                        }
 
                     } else if (pregunta.getTipo().equals("6")) {//multiple respuesta sin ordenamiento
                         List<Respuesta> respuestas = pregunta.getRespuestaList();
